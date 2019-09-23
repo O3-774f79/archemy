@@ -39,6 +39,13 @@ const Index = props => {
       url: '/Product',
       parent: null,
     },
+    {
+      name: 'Order',
+      icon: 'team',
+      displayOnly: false,
+      url: '/Order',
+      parent: null,
+    },
   ]);
   const [userLogin, setUserLogin] = useState ({
     empNo: '001754',

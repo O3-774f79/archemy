@@ -2,7 +2,8 @@ import React from 'react';
 import {Route, Switch} from 'react-router-dom';
 import {LoginPage, Content1} from './pages';
 import Product from './pages/Product';
-import Accounts from './pages/Sale/Accounts/index';
+import Accounts from './pages/Sale/Accounts';
+import Order from './pages/Order';
 import PrivateRoute from './components/PrivateRoute';
 function App () {
   return (
@@ -11,6 +12,7 @@ function App () {
       <PrivateRoute path="/Inbox" component={Content1} />
       <PrivateRoute path="/Sales/Accounts" component={Accounts} />
       <PrivateRoute path="/Product" component={Product} />
+      <PrivateRoute path="/Order" component={Order} />
       <Route path="*" component={LoginPage} />
     </Switch>
   );

@@ -10,9 +10,9 @@ const Header = styled.div`
 `;
 const Button = styled.button`
     color: black
-    backgroundColor: #fff
+    border-radius: 3px
+    background-color: #fff
     cursor: pointer
-    borderRadius: 4px
 `;
 export default class Accounts extends React.PureComponent {
   state = {

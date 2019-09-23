@@ -1,5 +1,7 @@
 import React from 'react';
 import CardInformation from './CardInformation';
+import GrapPage from './GraphPage';
+import TimelneAccounts from './TimelineAccounts';
 export default class DetailAccounts extends React.PureComponent {
   render () {
     return (
@@ -18,7 +20,11 @@ export default class DetailAccounts extends React.PureComponent {
               card1
             </div>
           </div>
-          <div style={{width: '60%'}}>2</div>
+          <div style={{width: '60%'}}>
+            <GrapPage />
+            <TimelneAccounts />
+            <div />
+          </div>
         </div>
       </React.Fragment>
     );
