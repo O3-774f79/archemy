@@ -1,7 +1,7 @@
 {
   "name": "evf-boon",
   "version": "0.1.0",
-  "homepage": "https://10.7.1.72/spe",
+  "homepage": "https://139.180.30.44/demo",
   "proxy": "http://localhost:4000",
   "private": true,
   "dependencies": {
