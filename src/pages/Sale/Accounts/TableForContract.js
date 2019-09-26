@@ -140,6 +140,9 @@ export default class EditableTable extends React.Component {
       ProductList: [],
       Producid: 0,
 
+      id: 0,
+      accountId: 0,
+      AccountName: '',
       MainContract: '',
       Contract1: '',
       StartDate: '',
@@ -150,6 +153,8 @@ export default class EditableTable extends React.Component {
 
       btnSubmitloading: false,
       btnSaveloading: false,
+
+      recState: {},
     }
   }
   onChange = value => {
@@ -198,7 +203,22 @@ export default class EditableTable extends React.Component {
       contractPrince: 0,
     })
   }
+  handleCallGetDetail = async () => {
+    const ItemRes = await axios.get(
+      `http://ams.leaderplanet.co.th/archemyApi/api/Contract/GetDetail?id=${this.props.recordSelect.id}`
+    )
+    await this.setState({ id: ItemRes.data.id })
+    await this.setState({ accountId: ItemRes.data.accountId })
+    await this.setState({ AccountName: ItemRes.data.accountName })
+    await this.setState({ dataSource: ItemRes.data.contractItems })
+    await this.setState({ Contract1: ItemRes.data.contract1 })
+    await this.setState({ MainContract: ItemRes.data.mainContract })
+    await this.setState({ StartDate: ItemRes.data.startDateString })
+    await this.setState({ EndDateText: ItemRes.data.endDateString })
+    await this.setState({ productStatus: ItemRes.data.status })
 
+    await alert(JSON.stringify(ItemRes.data))
+  }
   handleSave = row => {
     const newData = [...this.state.dataSource]
     const index = newData.findIndex(item => row.key === item.key)
@@ -210,11 +230,12 @@ export default class EditableTable extends React.Component {
     this.setState({ dataSource: newData })
   }
   async componentDidMount() {
-    await console.log(this.state)
+    await console.log(this.props.recordSelect.accountId)
     const res = await axios.get(
       `http://ams.leaderplanet.co.th/archemyApi/api/Product/GetList`
     )
     await this.setState({ ProductList: res.data })
+    // await this.setState({recState:rec})
   }
   onStartDateChange = (date, dateString) => {
     this.setState({ StartDate: date, StartDateText: dateString })
@@ -248,9 +269,9 @@ export default class EditableTable extends React.Component {
     this.setState({ btnSubmitloading: true })
     e.preventDefault()
     const dataSend = {
-      id: 0,
-      accountId: this.props.selected.id,
-      accountName: this.props.selected.accountName,
+      id: this.state.id,
+      accountId: this.state.accountId,
+      accountName: this.state.accountName,
       mainContract: this.state.MainContract,
       contract1: this.state.Contract1,
       startDateString: this.state.StartDateText,
@@ -274,9 +295,9 @@ export default class EditableTable extends React.Component {
     this.setState({ btnSaveloading: true })
     e.preventDefault()
     const dataSend = {
-      id: 0,
-      accountId: this.props.selected.id,
-      accountName: this.props.selected.accountName,
+      id: this.state.id,
+      accountId: this.state.accountId,
+      accountName: this.state.accountName,
       mainContract: this.state.MainContract,
       contract1: this.state.Contract1,
       startDateString: this.state.StartDateText,
@@ -369,7 +390,7 @@ export default class EditableTable extends React.Component {
                 </div>
                 <div style={{ width: '60%' }}>
                   <Input
-                    value={this.props.selected.accountName}
+                    value={this.props.recordSelect.accountName}
                     // onChange={e => this.handleContactNameChange(e)}
                   />
                 </div>
@@ -409,7 +430,7 @@ export default class EditableTable extends React.Component {
                 <div style={{ width: '60%' }}>
                   <DatePicker
                     onChange={this.onStartDateChange}
-                    value={this.state.StartDate}
+                    value={this.state.startDateString}
                   />
                 </div>
               </div>
@@ -422,7 +443,7 @@ export default class EditableTable extends React.Component {
                 <div style={{ width: '60%' }}>
                   <DatePicker
                     onChange={this.onEndDateChange}
-                    value={this.state.EndDate}
+                    value={this.state.endDateString}
                   />
                 </div>
               </div>
@@ -434,7 +455,7 @@ export default class EditableTable extends React.Component {
                 </div>
                 <div style={{ width: '60%' }}>
                   <Select
-                    defaultValue={'UnActive'}
+                    defaultValue={this.state.status}
                     style={{ width: 120 }}
                     onChange={this.statushandleChange}
                   >
@@ -484,6 +505,13 @@ export default class EditableTable extends React.Component {
                 style={{ marginBottom: 16 }}
               >
                 Add a row
+              </Button>
+              <Button
+                onClick={this.handleCallGetDetail}
+                type="primary"
+                style={{ marginBottom: 16 }}
+              >
+                Get More
               </Button>
               <Table
                 components={components}
