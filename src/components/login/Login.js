@@ -3,6 +3,7 @@ import styled, { createGlobalStyle } from 'styled-components'
 import { Form, Icon, Input } from 'antd'
 import { Link } from 'react-router-dom'
 import { Button } from '../button/button'
+import axios from 'axios'
 import './Login.css'
 const LoginForm = styled.div`
     background-color: #fafafa
@@ -35,6 +36,15 @@ const LoginFormStyle = styled.div`
   justify-content: center
   margin-top: 50px
 `
+const handleClick = () => {
+  axios
+    .post('http://ams.leaderplanet.co.th/archemyApi/api/Login', {
+      username: 'admin@leaderplanet.co.th',
+      password: 'admin',
+    })
+    .then(res => console.log(res.data))
+    .catch(e => console.log(e.response))
+}
 const Login = props => (
   <React.Fragment>
     <GlobalStyle bgImage={props.bgImage} />
@@ -76,8 +86,13 @@ const Login = props => (
             )}
           </Form.Item>
           <Form.Item style={{ textAlign: 'center' }}>
-            <Link to="/Inbox">
-              <Button type="submit" width="300px" height="43px">
+            <Link to="/Sales/Accounts">
+              <Button
+                type="submit"
+                width="300px"
+                height="43px"
+                onClick={() => handleClick()}
+              >
                 Log in
               </Button>
             </Link>
