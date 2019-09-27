@@ -217,7 +217,7 @@ export default class EditableTable extends React.Component {
     await this.setState({ EndDateText: ItemRes.data.endDateString })
     await this.setState({ productStatus: ItemRes.data.status })
 
-    await alert(JSON.stringify(ItemRes.data))
+    // await alert (JSON.stringify (ItemRes.data));
   }
   handleSave = row => {
     const newData = [...this.state.dataSource]
@@ -349,6 +349,16 @@ export default class EditableTable extends React.Component {
           title="New Contract"
           visible={this.props.modalContract}
           width="1000px"
+          style={{ top: 20 }}
+          onOk={this.handleOk}
+          onCancel={() => {
+            this.props.handleModal()
+            this.setState({
+              btnSubmitloading: false,
+              btnSaveloading: false,
+            })
+            this.handleSetValue()
+          }}
           footer={[
             <Button
               type="danger"
@@ -359,6 +369,7 @@ export default class EditableTable extends React.Component {
                   btnSubmitloading: false,
                   btnSaveloading: false,
                 })
+                this.handleSetValue()
               }}
             >
               Cancle
@@ -382,6 +393,13 @@ export default class EditableTable extends React.Component {
         >
           {
             <div>
+              <Button
+                onClick={this.handleCallGetDetail}
+                type="info"
+                style={{ marginBottom: 16 }}
+              >
+                Get More
+              </Button>
               <div style={{ display: 'flex', margin: 5 }}>
                 <div
                   style={{ width: '40%', textAlign: 'right', marginRight: 5 }}
@@ -505,13 +523,6 @@ export default class EditableTable extends React.Component {
                 style={{ marginBottom: 16 }}
               >
                 Add a row
-              </Button>
-              <Button
-                onClick={this.handleCallGetDetail}
-                type="primary"
-                style={{ marginBottom: 16 }}
-              >
-                Get More
               </Button>
               <Table
                 components={components}

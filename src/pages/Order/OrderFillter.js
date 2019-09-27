@@ -41,15 +41,15 @@ export default class OrderFillter extends React.PureComponent {
       //     dataIndex: 'status',
       //     key: 'status',
       //   },
-      {
-        title: '',
-        dataIndex: 'address',
-        key: 'address',
-        width: '10%',
-        render: (text, record) => (
-          <Button onClick={() => this.handleEditClick(record)}>edit</Button>
-        ),
-      },
+      //   {
+      //     title: '',
+      //     dataIndex: 'address',
+      //     key: 'address',
+      //     width: '10%',
+      //     render: (text, record) => (
+      //       <Button onClick={() => this.handleEditClick (record)}>edit</Button>
+      //     ),
+      //   },
     ],
   }
   handleEditClick = record => {

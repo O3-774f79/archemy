@@ -150,6 +150,11 @@ export default class AccountSearch extends React.PureComponent {
       <React.Fragment>
         {this.state.pageStatus === 'view' ? (
           <span>
+            <div>
+              <label style={{ fontSize: '30px', color: 'black' }}>
+                Total Amount
+              </label>
+            </div>
             <div style={{ display: 'flex', marginBottom: 5 }}>
               <div>
                 <label>Product Type :</label>

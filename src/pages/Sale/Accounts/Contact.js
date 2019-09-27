@@ -1,26 +1,26 @@
-import React from 'react';
-import {Icon, Input} from 'antd';
-import styled from 'styled-components';
-import axios from 'axios';
+import React from 'react'
+import { Icon, Input } from 'antd'
+import styled from 'styled-components'
+import axios from 'axios'
 const Row = styled.div`
     width: 100%
     display: flex
-`;
+`
 const LabelLeft = styled.div`
     width: 30%
     text-align: right
     margin: 3px
-`;
+`
 const InputRight = styled.div`
     width: 70%
     margin: 3px
-`;
+`
 const Header = styled.div`
     height: 40px
     border-bottom: 1px solid black
     display: flex
     justify-content: space-between
-`;
+`
 const Card = styled.div`
     border: 1px solid black
     background-color: #fff
@@ -29,7 +29,7 @@ const Card = styled.div`
     padding: 6px
     height: 200px
     overflow-y: auto
-`;
+`
 export default class Contact extends React.PureComponent {
   state = {
     statusEditCard1: false,
@@ -46,9 +46,9 @@ export default class Contact extends React.PureComponent {
     status: '',
 
     contactList: [],
-  };
-  componentDidMount () {
-    this.setState ({
+  }
+  componentDidMount() {
+    this.setState({
       id: this.props.dataDetail.id,
       accountName: this.props.dataDetail.accountName,
       phoneNo: this.props.dataDetail.phoneNo,
@@ -58,21 +58,21 @@ export default class Contact extends React.PureComponent {
       subTypeId: this.props.dataDetail.subTypeId,
       areaName: this.props.dataDetail.areaName,
       status: this.props.dataDetail.status,
-    });
+    })
     axios
-      .get (
+      .get(
         `http://ams.leaderplanet.co.th/archemyApi/api/Contact/GetListByAccount?accountId=${this.props.dataDetail.id}
     `
       )
-      .then (res => this.setState ({contactList: res.data}))
-      .catch (err => console.log (err));
+      .then(res => this.setState({ contactList: res.data }))
+      .catch(err => console.log(err))
   }
   //todo
   // set state = value in service
-  render () {
+  render() {
     const handleSubmitCard1 = async () => {
-      await this.setState ({statusEditCard1: false});
-    };
+      await this.setState({ statusEditCard1: false })
+    }
     const {
       statusEditCard1,
       value1,
@@ -84,7 +84,7 @@ export default class Contact extends React.PureComponent {
       subTypeId,
       areaName,
       status,
-    } = this.state;
+    } = this.state
     return (
       <Card>
         <Header>
@@ -99,15 +99,16 @@ export default class Contact extends React.PureComponent {
           </label>
           <Icon
             type="setting"
-            style={{cursor: 'pointer'}}
+            style={{ cursor: 'pointer' }}
             onClick={() =>
-              this.setState ({
+              this.setState({
                 statusEditCard1: true,
-              })}
+              })
+            }
           />
         </Header>
-        <div body style={{padding: 5}}>
-          {this.state.contactList.map (items => (
+        <div body style={{ padding: 5 }}>
+          {this.state.contactList.map(items => (
             <span>
               <Row>
                 <LabelLeft>
@@ -144,15 +145,15 @@ export default class Contact extends React.PureComponent {
             </span>
           ))}
 
-          {statusEditCard1 === true
+          {/* {statusEditCard1 === true
             ? <div footer>
                 <button style={{cursor: 'pointer'}} onClick={handleSubmitCard1}>
                   submit
                 </button>
               </div>
-            : null}
+            : null} */}
         </div>
       </Card>
-    );
+    )
   }
 }

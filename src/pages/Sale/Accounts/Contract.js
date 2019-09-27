@@ -79,9 +79,8 @@ export default class Contract extends React.PureComponent {
         width: '30%',
         render: (text, record) => (
           <span>
-            <Button onClick={() => this.handleView(record)}>View</Button>
             <Button onClick={() => this.handleEdit(record)}>Edit</Button>
-            <Button onClick={() => this.handleDelete(record)}>Delete</Button>
+            {/* <Button type="danger" onClick={() => this.handleDelete (record)}>Delete</Button> */}
           </span>
         ),
       },

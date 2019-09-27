@@ -328,6 +328,15 @@ export default class EditableTable extends React.Component {
           title="New Contract"
           visible={this.props.modalContract}
           width="1000px"
+          style={{ top: 20 }}
+          onCancel={() => {
+            this.props.handleModal()
+            this.setState({
+              btnSubmitloading: false,
+              btnSaveloading: false,
+            })
+            this.handleSetValue()
+          }}
           footer={[
             <Button
               type="danger"
@@ -338,6 +347,7 @@ export default class EditableTable extends React.Component {
                   btnSubmitloading: false,
                   btnSaveloading: false,
                 })
+                this.handleSetValue()
               }}
             >
               Cancle
