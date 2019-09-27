@@ -53,6 +53,13 @@ const Index = props => {
       url: '/Order',
       parent: null,
     },
+    {
+      name: 'OrderFillter',
+      icon: 'file-text',
+      displayOnly: false,
+      url: '/OrderFillter',
+      parent: null,
+    },
   ])
   const [userLogin, setUserLogin] = useState({
     empNo: '001754',

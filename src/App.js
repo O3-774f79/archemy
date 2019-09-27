@@ -6,6 +6,7 @@ import Accounts from './pages/Sale/Accounts'
 import Order from './pages/Order'
 import AccountsForSearch from './pages/Sale/accountSearch/AccountSearch'
 import PrivateRoute from './components/PrivateRoute'
+import OrderFillter from './pages/Order/OrderFillter'
 function App() {
   return (
     <Switch>
@@ -15,6 +16,7 @@ function App() {
       <PrivateRoute path="/Product" component={Product} />
       <PrivateRoute path="/Order" component={Order} />
       <PrivateRoute path="/Sales/Sale" component={AccountsForSearch} />
+      <PrivateRoute path="/OrderFillter" component={OrderFillter} />
       <Route path="*" component={LoginPage} />
     </Switch>
   )

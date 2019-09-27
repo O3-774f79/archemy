@@ -177,7 +177,6 @@ export default class Contract extends React.PureComponent {
             ) : null}
           </div>
         </Card>
-        }
         {this.state.ClickView === 'view' ? null : (
           <TableForContact
             modalContract={this.state.modalContract}
